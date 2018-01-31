@@ -49,7 +49,7 @@ namespace UnitTests
         public async Task Events_SortingTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsReqeust(){SortBy = Sorting.CreatedDesc});
+            var result = await client.Events(new EventsRequest(){SortBy = Sorting.CreatedDesc});
             Assert.NotNull(result);
         }
 
@@ -57,7 +57,7 @@ namespace UnitTests
         public async Task Events_CoinsTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsReqeust() { Coins = new List<string>() { "Bitcoin (BTC)", "Ripple (XRP)"} });
+            var result = await client.Events(new EventsRequest() { Coins = new List<string>() { "Bitcoin (BTC)", "Ripple (XRP)"} });
             Assert.NotNull(result);
         }
 
@@ -65,7 +65,7 @@ namespace UnitTests
         public async Task Events_CategoriesTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsReqeust() { Categories = await client.Categories() });
+            var result = await client.Events(new EventsRequest() { Categories = await client.Categories() });
             Assert.NotNull(result);
         }
     }

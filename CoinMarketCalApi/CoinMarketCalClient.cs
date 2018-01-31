@@ -43,7 +43,7 @@ namespace CoinMarketCalApi
             return MakeRequest<IEnumerable<string>>("/api/categories");
         }
 
-        public Task<IEnumerable<EventResponse>> Events(EventsReqeust request = null)
+        public Task<IEnumerable<EventResponse>> Events(EventsRequest request = null)
         {
             
             var builderUri = "/api/events".ApplyParameters(new Dictionary<string, string>()

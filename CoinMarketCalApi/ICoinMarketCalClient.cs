@@ -23,7 +23,7 @@ namespace CoinMarketCalApi
         /// Retrieve list of events
         /// </summary>
         /// <param name="request">Reqeust entity with filters</param>
-        Task<IEnumerable<EventResponse>> Events(EventsReqeust request = null);
+        Task<IEnumerable<EventResponse>> Events(EventsRequest request = null);
         /// <summary>
         /// Retrieve list of events
         /// </summary>

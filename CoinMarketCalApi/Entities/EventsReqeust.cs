@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CoinMarketCalApi.Entities
 {
-    public class EventsReqeust
+    public class EventsRequest
     {
         /// <summary>
         /// Page number
