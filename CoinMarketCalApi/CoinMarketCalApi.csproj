@@ -2,7 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1</Version>
+    <Authors>Anton Yaroshenko</Authors>
+    <Company />
+    <Product>CoinMarketCal API</Product>
+    <Description>CoinMarketCal API C# wrapper
+https://coinmarketcal.com</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>cryptocurrency, C#, dot-net, netstandard2.0, bitcoin</PackageTags>
+    <RepositoryUrl>https://github.com/stepkillah/CoinMarketCalApi</RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <PackageProjectUrl>https://github.com/stepkillah/CoinMarketCalApi</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/stepkillah/CoinMarketCalApi/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
