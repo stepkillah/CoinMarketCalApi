@@ -2,6 +2,10 @@
 
 C# Wrapper for CoinMarketCal API (https://coinmarketcal.com/) 
 
+Attention! CoinMarketCal API currently in beta
+
+
+
 ## Available for:
 - .NET Standard 2.0
 - .NET 4.5
