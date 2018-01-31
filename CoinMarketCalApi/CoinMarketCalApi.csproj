@@ -14,7 +14,7 @@ https://coinmarketcal.com</Description>
     <RepositoryUrl>https://github.com/stepkillah/CoinMarketCalApi</RepositoryUrl>
     <RepositoryType></RepositoryType>
     <PackageProjectUrl>https://github.com/stepkillah/CoinMarketCalApi</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://github.com/stepkillah/CoinMarketCalApi/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
