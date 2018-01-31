@@ -13,7 +13,7 @@ Attention! CoinMarketCal API currently in beta
 ## Example:
 ```csharp
 // Get the instane
-var client = new CoinMarketCalClient(); // or using DI ICoinMarketCalClient
+var client = new CoinMarketCalClient(); // or using ICoinMarketCalClient
 // Get coins list
 var coins = await client.Coins();
 // Get categories list
