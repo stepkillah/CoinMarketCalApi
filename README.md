@@ -2,6 +2,8 @@
 
 C# Wrapper for CoinMarketCal API (https://coinmarketcal.com/) 
 
+[![NuGet](https://img.shields.io/nuget/v/CoinMarketCalApi.svg)](https://www.nuget.org/packages/CoinMarketCalApi/)
+ 
 ### Attention!
 CoinMarketCal API currently in beta
 
