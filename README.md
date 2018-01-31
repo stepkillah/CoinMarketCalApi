@@ -17,6 +17,6 @@ var categories = await client.Categories();
 // Get default events
 var events = await client.Events();
 // Get events for Bitcoin and Ripple
-var result = await client.Events(new EventsReqeust() { Coins = new List<string>() { "Bitcoin (BTC)", "Ripple (XRP)"} });
+var result = await client.Events(new EventsRequest() { Coins = new List<string>() { "Bitcoin (BTC)", "Ripple (XRP)"} });
   
 ```
