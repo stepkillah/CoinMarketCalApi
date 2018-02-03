@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CoinMarketCalApi.Entities;
 using CoinMarketCalApi.Extensions;
-using CoinMarketCalApi.Response;
 using Newtonsoft.Json;
 
 namespace CoinMarketCalApi
@@ -13,8 +12,10 @@ namespace CoinMarketCalApi
     public class CoinMarketCalClient : ICoinMarketCalClient
     {
         private const string BaseUrl = "https://coinmarketcal.com/";
-        
-        private readonly HttpClient _client;
+
+	    private static readonly DateTime MinDateTime = new DateTime(2017,11,25);
+
+	    private readonly HttpClient _client;
         private bool _isDisposed;
 
         public CoinMarketCalClient():this(new HttpClientHandler())
@@ -32,35 +33,52 @@ namespace CoinMarketCalApi
             };
         }
 
-
-        public Task<IEnumerable<string>> Coins()
+	    /// <summary>
+	    /// Retrieve list of coins
+	    /// </summary>
+	    /// <returns>List of available coins</returns>
+		public Task<IEnumerable<string>> Coins()
         {
             return MakeRequest<IEnumerable<string>>("/api/coins");
         }
-
-        public Task<IEnumerable<string>> Categories()
+	    /// <summary>
+	    /// Retrieve list of categories
+	    /// </summary>
+	    /// <returns>List of available categories</returns>
+		public Task<IEnumerable<string>> Categories()
         {
             return MakeRequest<IEnumerable<string>>("/api/categories");
         }
-
-        public Task<IEnumerable<EventResponse>> Events(EventsRequest request = null)
+	    /// <summary>
+	    /// Retrieve list of events
+	    /// </summary>
+	    /// <param name="request">Reqeust entity with filters</param>
+	    /// <exception cref="ArgumentException">You can not fetch event before the date of 25/11/2017</exception>  
+		public Task<IEnumerable<Event>> Events(EventsRequest request = null)
         {
-            
+	        if ((request?.DateRangeStart.HasValue ?? false) && request.DateRangeStart < MinDateTime)
+	        {
+		        throw new ArgumentException($"You can not fetch event before the date of 25/11/2017");
+	        }
             var builderUri = "/api/events".ApplyParameters(new Dictionary<string, string>()
             {
                 {nameof(request.Page), request?.Page?.ToString()},
                 {nameof(request.Categories), request?.Categories?.ToJoinedList()},
                 {nameof(request.Coins), request?.Coins?.ToJoinedList()},
                 {nameof(request.Max), request?.Max?.ToString()},
-                {nameof(request.Month), request?.Month?.ToString()},
-                {nameof(request.ShowPaswEvents), request?.ShowPaswEvents?.ToString()},
-                {nameof(request.Year), request?.Year?.ToString()},
+                {nameof(request.DateRangeStart), request?.DateRangeStart?.ToString("dd/MM/yyyy")},
+                {nameof(request.DateRangeEnd), request?.DateRangeEnd?.ToString("dd/MM/yyyy")},
                 {nameof(request.SortBy), request?.SortBy?.GetFriendlyName()},
             });
-            return MakeRequest<IEnumerable<EventResponse>>(builderUri);
+            return MakeRequest<IEnumerable<Event>>(builderUri);
         }
-
-        public Task<IEnumerable<EventResponse>> Events(int page, int? max = null, IEnumerable<string> coins = null)
+	    /// <summary>
+	    /// Retrieve list of events
+	    /// </summary>
+	    /// <param name="page">Page number</param>
+	    /// <param name="max">Maximum amount of events to display per page</param>
+	    /// <param name="coins">Coins</param>
+		public Task<IEnumerable<Event>> Events(int page, int? max = null, IEnumerable<string> coins = null)
         {
             var builderUri = "/api/events".ApplyParameters(new Dictionary<string, string>()
             {
@@ -69,7 +87,7 @@ namespace CoinMarketCalApi
                 {nameof(coins), coins?.ToJoinedList()}
 
             });
-            return MakeRequest<IEnumerable<EventResponse>>(builderUri);
+            return MakeRequest<IEnumerable<Event>>(builderUri);
         }
 
         private async Task<T> MakeRequest<T>(string url)

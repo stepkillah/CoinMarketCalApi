@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
-namespace CoinMarketCalApi.Response
+namespace CoinMarketCalApi.Entities
 {
-    public class EventResponse
+    public class Event
     {
         [JsonProperty("id")]
         public string Id { get; set; }

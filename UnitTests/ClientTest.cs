@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoinMarketCalApi;
@@ -68,5 +69,13 @@ namespace UnitTests
             var result = await client.Events(new EventsRequest() { Categories = await client.Categories() });
             Assert.NotNull(result);
         }
-    }
+
+	    [Test]
+	    public async Task Events_DateRangeTest()
+	    {
+		    var client = new CoinMarketCalClient();
+		    var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Now, DateRangeEnd = DateTime.Now.AddDays(7)});
+		    Assert.NotNull(result);
+	    }
+	}
 }

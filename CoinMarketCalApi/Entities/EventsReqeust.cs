@@ -15,14 +15,6 @@ namespace CoinMarketCalApi.Entities
         /// </summary>
         public int? Max { get; set; }
         /// <summary>
-        /// Month of the event
-        /// </summary>
-        public int? Month { get; set; }
-        /// <summary>
-        /// Year of the event
-        /// </summary>
-        public int? Year { get; set; }
-        /// <summary>
         /// Coins
         /// </summary>
         public IEnumerable<string> Coins { get; set; }
@@ -34,9 +26,13 @@ namespace CoinMarketCalApi.Entities
         /// Sorting parameter
         /// </summary>
         public Sorting? SortBy { get; set; }
-        /// <summary>
-        /// Show Past Event
-        /// </summary>
-        public bool? ShowPaswEvents { get; set; }
-    }
+	    /// <summary>
+	    /// Events from that date
+	    /// </summary>
+	    public DateTime? DateRangeStart { get; set; }
+		/// <summary>
+		/// Events to that date
+		/// </summary>
+		public DateTime? DateRangeEnd { get; set; }
+	}
 }
