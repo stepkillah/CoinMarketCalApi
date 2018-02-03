@@ -77,5 +77,14 @@ namespace UnitTests
 		    var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Now, DateRangeEnd = DateTime.Now.AddDays(7)});
 		    Assert.NotNull(result);
 	    }
+
+	    [Test]
+	    public async Task Events_DateTomorrowTest()
+	    {
+		    var client = new CoinMarketCalClient();
+		    var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Today.AddDays(1), DateRangeEnd = DateTime.Now.AddDays(1) });
+		    Assert.NotNull(result);
+			Assert.AreEqual(DateTime.Today.AddDays(1).Date,result.First().Date.Date);
+	    }
 	}
 }
