@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.1</Version>
+    <Version>0.2.2</Version>
     <Authors>Anton Yaroshenko</Authors>
     <Company />
     <Product>CoinMarketCal API</Product>
@@ -16,6 +16,9 @@ https://coinmarketcal.com</Description>
     <PackageProjectUrl>https://github.com/stepkillah/CoinMarketCalApi</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://github.com/stepkillah/CoinMarketCalApi/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageReleaseNotes>[14/02/2018] Update:
+-changed field coin to coins as an array of objects in Event response object
+-changed field event_is_deadline to can_occur_before in Event response object</PackageReleaseNotes>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
