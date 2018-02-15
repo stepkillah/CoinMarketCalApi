@@ -10,10 +10,8 @@ namespace CoinMarketCalApi.Entities
         public string Id { get; set; }
         [JsonProperty("title")]
         public string Title { get; set; }
-        [JsonProperty("coin_name")]
-        public string Name { get; set; }
-        [JsonProperty("coin_symbol")]
-        public string Symbol { get; set; }
+        [JsonProperty("coins")]
+		public IEnumerable<Coin> Coins { get; set; }
         [JsonProperty("date_event")]
         public DateTime Date { get; set; }
         [JsonProperty("created_date")]
@@ -40,8 +38,17 @@ namespace CoinMarketCalApi.Entities
         public string TipAddress { get; set; }
         [JsonProperty("twitter_account")]
         public string TwitterAccount { get; set; }
-        [JsonProperty("event_is_deadline")]
-        public bool Deadline { get; set; }
+        [JsonProperty("can_occur_before")]
+        public bool CanOccurBefore { get; set; }
 
     }
+
+
+	public class Coin
+	{
+		[JsonProperty("name")]
+		public string Name { get; set; }
+		[JsonProperty("symbol")]
+		public string Symbol { get; set; }
+	}
 }
