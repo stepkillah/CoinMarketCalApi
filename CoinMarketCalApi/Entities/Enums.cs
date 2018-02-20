@@ -9,4 +9,9 @@ namespace CoinMarketCalApi
         CreatedDesc,
         HotEvents
     }
+
+	public enum ShowOnly
+	{
+		HotEvents
+	}
 }

@@ -87,5 +87,14 @@ namespace UnitTests
 			Assert.AreEqual(DateTime.Today.AddDays(1).Date,result.First().Date.Date);
 	    }
 
+	    [Test]
+	    public async Task Events_OnlyHot()
+	    {
+		    var client = new CoinMarketCalClient();
+		    var result = await client.Events(new EventsRequest() { ShowOnly = ShowOnly.HotEvents});
+		    Assert.NotNull(result);
+		    Assert.AreEqual(true, result.All(x=>x.Hot));
+	    }
+
 	}
 }

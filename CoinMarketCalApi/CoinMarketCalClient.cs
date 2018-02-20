@@ -69,7 +69,8 @@ namespace CoinMarketCalApi
                 {nameof(request.DateRangeStart), request?.DateRangeStart?.ToString("dd/MM/yyyy")},
                 {nameof(request.DateRangeEnd), request?.DateRangeEnd?.ToString("dd/MM/yyyy")},
                 {nameof(request.SortBy), request?.SortBy?.GetFriendlyName()},
-            });
+	            {nameof(request.ShowOnly), request?.ShowOnly?.GetFriendlyName()},
+			});
             return MakeRequest<IEnumerable<Event>>(builderUri);
         }
 	    /// <summary>

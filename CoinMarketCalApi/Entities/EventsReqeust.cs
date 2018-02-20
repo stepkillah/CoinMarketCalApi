@@ -27,9 +27,13 @@ namespace CoinMarketCalApi.Entities
         /// </summary>
         public Sorting? SortBy { get; set; }
 	    /// <summary>
-	    /// Events from that date
+	    /// Sorting parameter
 	    /// </summary>
-	    public DateTime? DateRangeStart { get; set; }
+	    public ShowOnly? ShowOnly { get; set; }
+		/// <summary>
+		/// Events from that date
+		/// </summary>
+		public DateTime? DateRangeStart { get; set; }
 		/// <summary>
 		/// Events to that date
 		/// </summary>
