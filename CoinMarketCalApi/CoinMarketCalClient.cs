@@ -151,7 +151,7 @@ namespace CoinMarketCalApi
         {
             AuthorizationToken =
                 await MakeRequest<Auth>(
-                    $"/v1/token?grant_type={GrantType}&client_id={ClientId}&client_secret={ClientSecret}");
+                    $"/oauth/v2/token?grant_type={GrantType}&client_id={ClientId}&client_secret={ClientSecret}");
         }
 
         /// <summary>
