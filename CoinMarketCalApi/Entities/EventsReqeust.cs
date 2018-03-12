@@ -15,28 +15,28 @@ namespace CoinMarketCalApi.Entities
         /// </summary>
         public int? Max { get; set; }
         /// <summary>
-        /// Coins
+        /// Coins Ids
         /// </summary>
         public IEnumerable<string> Coins { get; set; }
         /// <summary>
-        /// Categories
+        /// Categories Ids
         /// </summary>
         public IEnumerable<string> Categories { get; set; }
         /// <summary>
         /// Sorting parameter
         /// </summary>
         public Sorting? SortBy { get; set; }
-	    /// <summary>
-	    /// Sorting parameter
-	    /// </summary>
-	    public ShowOnly? ShowOnly { get; set; }
-		/// <summary>
-		/// Events from that date
-		/// </summary>
-		public DateTime? DateRangeStart { get; set; }
-		/// <summary>
-		/// Events to that date
-		/// </summary>
-		public DateTime? DateRangeEnd { get; set; }
-	}
+        /// <summary>
+        /// Sorting parameter
+        /// </summary>
+        public ShowOnly? ShowOnly { get; set; }
+        /// <summary>
+        /// Events from that date
+        /// </summary>
+        public DateTime? DateRangeStart { get; set; }
+        /// <summary>
+        /// Events to that date
+        /// </summary>
+        public DateTime? DateRangeEnd { get; set; }
+    }
 }

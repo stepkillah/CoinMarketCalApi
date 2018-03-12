@@ -10,8 +10,8 @@ namespace CoinMarketCalApi
         HotEvents
     }
 
-	public enum ShowOnly
-	{
-		HotEvents
-	}
+    public enum ShowOnly
+    {
+        HotEvents
+    }
 }

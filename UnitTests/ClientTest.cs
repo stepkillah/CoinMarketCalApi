@@ -11,13 +11,21 @@ namespace UnitTests
     [TestFixture]
     public class ClientTest
     {
+        // Update when tests need to be run. Should be permanent in next release
+        private const string AccessToken = "ZjM3ZWU2YTA2Y2IyNmRiYWQ0NzAwYTBmZjVmYmY5ZDU4MTYxMWU5ZmIxMmIzODYyYmY4OTc1NmUzOTllZGZjZQ";
+
+        public ClientTest()
+        {
+            CoinMarketCalClient.AccessToken = AccessToken;
+        }
+
         [Test]
         public async Task Coins_Test()
         {
             var client = new CoinMarketCalClient();
             var result = await client.Coins();
             Assert.NotNull(result);
-            Assert.Greater(result.Count(),1);
+            Assert.Greater(result.Count(), 1);
         }
 
         [Test]
@@ -42,7 +50,7 @@ namespace UnitTests
         public async Task Events_PageMaxFilterTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(1,25);
+            var result = await client.Events(1, 25);
             Assert.NotNull(result);
         }
 
@@ -50,7 +58,7 @@ namespace UnitTests
         public async Task Events_SortingTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsRequest(){SortBy = Sorting.CreatedDesc});
+            var result = await client.Events(new EventsRequest() { SortBy = Sorting.CreatedDesc });
             Assert.NotNull(result);
         }
 
@@ -58,7 +66,7 @@ namespace UnitTests
         public async Task Events_CoinsTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsRequest() { Coins = new List<string>() { "Bitcoin (BTC)", "Ripple (XRP)"} });
+            var result = await client.Events(new EventsRequest() { Coins = new List<string>() { "bitcoin", "ripple" } });
             Assert.NotNull(result);
         }
 
@@ -66,35 +74,36 @@ namespace UnitTests
         public async Task Events_CategoriesTest()
         {
             var client = new CoinMarketCalClient();
-            var result = await client.Events(new EventsRequest() { Categories = await client.Categories() });
+            var result = await client.Events(new EventsRequest() { Categories = (await client.Categories()).Select(x => x.Id) });
             Assert.NotNull(result);
         }
 
-	    [Test]
-	    public async Task Events_DateRangeTest()
-	    {
-		    var client = new CoinMarketCalClient();
-		    var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Now, DateRangeEnd = DateTime.Now.AddDays(7)});
-		    Assert.NotNull(result);
-	    }
+        [Test]
+        public async Task Events_DateRangeTest()
+        {
+            var client = new CoinMarketCalClient();
+            var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Now, DateRangeEnd = DateTime.Now.AddDays(7) });
+            Assert.NotNull(result);
+        }
 
-	    [Test]
-	    public async Task Events_DateTomorrowTest()
-	    {
-		    var client = new CoinMarketCalClient();
-		    var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Today.AddDays(1), DateRangeEnd = DateTime.Now.AddDays(1) });
-		    Assert.NotNull(result);
-			Assert.AreEqual(DateTime.Today.AddDays(1).Date,result.First().Date.Date);
-	    }
+        [Test]
+        public async Task Events_DateTomorrowTest()
+        {
+            var client = new CoinMarketCalClient();
+            var result = await client.Events(new EventsRequest() { DateRangeStart = DateTime.Today.AddDays(1), DateRangeEnd = DateTime.Now.AddDays(1) });
+            Assert.NotNull(result);
+            Assert.AreEqual(DateTime.Today.AddDays(1).Date, result.First().Date.Date);
+        }
 
-	    [Test]
-	    public async Task Events_OnlyHot()
-	    {
-		    var client = new CoinMarketCalClient();
-		    var result = await client.Events(new EventsRequest() { ShowOnly = ShowOnly.HotEvents});
-		    Assert.NotNull(result);
-		    Assert.AreEqual(true, result.All(x=>x.Hot));
-	    }
+        [Test]
+        public async Task Events_OnlyHot()
+        {
+            var client = new CoinMarketCalClient();
+            var result = await client.Events(new EventsRequest() { ShowOnly = ShowOnly.HotEvents });
+            Assert.NotNull(result);
+            Assert.AreEqual(true, result.All(x => x.Hot));
+        }
 
-	}
+
+    }
 }

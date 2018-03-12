@@ -10,20 +10,20 @@ namespace CoinMarketCalApi.Extensions
     /// </summary>
     internal static class UriExtensions
     {
-	    static string FirstCharacterToLower(string str)
-	    {
-		    if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
-			    return str;
+        static string FirstCharacterToLower(string str)
+        {
+            if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
+                return str;
 
-		    return Char.ToLowerInvariant(str[0]) + str.Substring(1);
-	    }
-		/// <summary>
-		/// Merge a dictionary of values with an existing <see cref="Uri"/>
-		/// </summary>
-		/// <param name="uri">Original request Uri</param>
-		/// <param name="parameters">Collection of key-value pairs</param>
-		/// <returns>Updated request Uri</returns>
-		public static Uri ApplyParameters(this Uri uri, IDictionary<string, string> parameters)
+            return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+        }
+        /// <summary>
+        /// Merge a dictionary of values with an existing <see cref="Uri"/>
+        /// </summary>
+        /// <param name="uri">Original request Uri</param>
+        /// <param name="parameters">Collection of key-value pairs</param>
+        /// <returns>Updated request Uri</returns>
+        public static Uri ApplyParameters(this Uri uri, IDictionary<string, string> parameters)
         {
             if (uri == null)
                 throw new ArgumentNullException($"{nameof(uri)} can't be null");
@@ -52,7 +52,7 @@ namespace CoinMarketCalApi.Extensions
                 queryString = hasQueryString == -1 ? "" : uri.OriginalString.Substring(hasQueryString);
             }
 
-            var values = queryString.Replace("?", "").Split(new[] {'&'}, StringSplitOptions.RemoveEmptyEntries);
+            var values = queryString.Replace("?", "").Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
 
             var existingParameters = values.ToDictionary(
                 key => key.Substring(0, key.IndexOf('=')),

@@ -12,18 +12,18 @@ namespace CoinMarketCalApi
         /// Retrieve list of coins
         /// </summary>
         /// <returns>List of available coins</returns>
-        Task<IEnumerable<string>> Coins();
+        Task<IEnumerable<Coin>> Coins();
         /// <summary>
         /// Retrieve list of categories
         /// </summary>
         /// <returns>List of available categories</returns>
-        Task<IEnumerable<string>> Categories();
-		/// <summary>
-		/// Retrieve list of events
-		/// </summary>
-		/// <param name="request">Reqeust entity with filters</param>
-		/// <exception cref="ArgumentException">You can not fetch event before the date of 25/11/2017</exception>  
-		Task<IEnumerable<Event>> Events(EventsRequest request = null);
+        Task<IEnumerable<Category>> Categories();
+        /// <summary>
+        /// Retrieve list of events
+        /// </summary>
+        /// <param name="request">Reqeust entity with filters</param>
+        /// <exception cref="ArgumentException">You can not fetch event before the date of 25/11/2017</exception>  
+        Task<IEnumerable<Event>> Events(EventsRequest request = null);
         /// <summary>
         /// Retrieve list of events
         /// </summary>

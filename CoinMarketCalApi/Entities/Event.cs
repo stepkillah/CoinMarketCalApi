@@ -11,7 +11,7 @@ namespace CoinMarketCalApi.Entities
         [JsonProperty("title")]
         public string Title { get; set; }
         [JsonProperty("coins")]
-		public IEnumerable<Coin> Coins { get; set; }
+        public IEnumerable<Coin> Coins { get; set; }
         [JsonProperty("date_event")]
         public DateTime Date { get; set; }
         [JsonProperty("created_date")]
@@ -31,7 +31,7 @@ namespace CoinMarketCalApi.Entities
         [JsonProperty("percentage")]
         public decimal Percentage { get; set; }
         [JsonProperty("categories")]
-        public IEnumerable<string> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
         [JsonProperty("tip_symbol")]
         public string TipSymbol { get; set; }
         [JsonProperty("tip_adress")]
@@ -43,12 +43,4 @@ namespace CoinMarketCalApi.Entities
 
     }
 
-
-	public class Coin
-	{
-		[JsonProperty("name")]
-		public string Name { get; set; }
-		[JsonProperty("symbol")]
-		public string Symbol { get; set; }
-	}
 }
