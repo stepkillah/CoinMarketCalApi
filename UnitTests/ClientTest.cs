@@ -104,6 +104,19 @@ namespace UnitTests
             Assert.AreEqual(true, result.All(x => x.Hot));
         }
 
+        [Test]
+        public async Task AuthorizeTest()
+        {
+
+            CoinMarketCalClient.ClientId = "your client id";
+            CoinMarketCalClient.ClientSecret = "your client secret";
+
+            var client = new CoinMarketCalClient();
+            var result = await client.Coins();
+            Assert.NotNull(result);
+        }
+
+
 
     }
 }

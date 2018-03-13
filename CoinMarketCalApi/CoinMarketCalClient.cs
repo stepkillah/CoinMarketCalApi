@@ -45,30 +45,34 @@ namespace CoinMarketCalApi
 
         private readonly HttpClient _client;
         private bool _isDisposed;
+        private static bool _isAuthorizeInProcess;
 
         public CoinMarketCalClient() : this(new HttpClientHandler())
         {
+
         }
 
         public CoinMarketCalClient(HttpClientHandler handler)
         {
             if (handler == null)
                 throw new ArgumentNullException($"{nameof(handler)} can't be null");
+
+          
+           
+            _client = new HttpClient(handler, true)
+            {
+                BaseAddress = new Uri(BaseUrl)
+            };
+
+
             if (string.IsNullOrEmpty(AccessToken))
             {
                 if (string.IsNullOrEmpty(ClientId) || string.IsNullOrEmpty(ClientSecret))
                 {
                     throw new ArgumentNullException($"{nameof(ClientId)} or {nameof(ClientSecret)} can't be empty");
                 }
-
                 HandleAuthorization().ConfigureAwait(false);
             }
-
-            _client = new HttpClient(handler, true)
-            {
-                BaseAddress = new Uri(BaseUrl)
-            };
-
         }
 
         /// <summary>
@@ -77,7 +81,11 @@ namespace CoinMarketCalApi
         /// <returns>List of available coins</returns>
         public Task<IEnumerable<Coin>> Coins()
         {
-            return MakeRequest<IEnumerable<Coin>>($"/v1/coins?access_token={AuthorizationToken?.AccessToken}");
+            return MakeRequest<IEnumerable<Coin>>($"/v1/coins".ApplyParameters(
+                new Dictionary<string, string>()
+                {
+                    {"access_token", AccessToken}
+                }));
         }
         /// <summary>
         /// Retrieve list of categories
@@ -85,7 +93,11 @@ namespace CoinMarketCalApi
         /// <returns>List of available categories</returns>
         public Task<IEnumerable<Category>> Categories()
         {
-            return MakeRequest<IEnumerable<Category>>($"/v1/categories?access_token={AuthorizationToken?.AccessToken}");
+            return MakeRequest<IEnumerable<Category>>($"/v1/categories".ApplyParameters(
+                new Dictionary<string, string>()
+                {
+                    {"access_token", AccessToken}
+                }));
         }
         /// <summary>
         /// Retrieve list of events
@@ -98,8 +110,9 @@ namespace CoinMarketCalApi
             {
                 throw new ArgumentException($"You can not fetch event before the date of 25/11/2017");
             }
-            var builderUri = $"/v1/events?access_token={AuthorizationToken?.AccessToken}".ApplyParameters(new Dictionary<string, string>()
+            var builderUri = $"/v1/events".ApplyParameters(new Dictionary<string, string>()
             {
+                {"access_token", AccessToken},
                 {nameof(request.Page), request?.Page?.ToString()},
                 {nameof(request.Categories), request?.Categories?.ToJoinedList()},
                 {nameof(request.Coins), request?.Coins?.ToJoinedList()},
@@ -107,7 +120,8 @@ namespace CoinMarketCalApi
                 {nameof(request.DateRangeStart), request?.DateRangeStart?.ToString("dd/MM/yyyy")},
                 {nameof(request.DateRangeEnd), request?.DateRangeEnd?.ToString("dd/MM/yyyy")},
                 {nameof(request.SortBy), request?.SortBy?.GetFriendlyName()},
-                {nameof(request.ShowOnly), request?.ShowOnly?.GetFriendlyName()},
+                {nameof(request.ShowOnly), request?.ShowOnly?.GetFriendlyName()}
+               
             });
             return MakeRequest<IEnumerable<Event>>(builderUri);
         }
@@ -120,18 +134,27 @@ namespace CoinMarketCalApi
         /// <param name="coins">Coins</param>
         public Task<IEnumerable<Event>> Events(int page, int? max = null, IEnumerable<string> coins = null)
         {
-            var builderUri = $"/v1/events?access_token={AuthorizationToken?.AccessToken}".ApplyParameters(new Dictionary<string, string>()
+            var builderUri = $"/v1/events".ApplyParameters(new Dictionary<string, string>()
             {
+                {"access_token", AccessToken},
                 {nameof(page), page.ToString()},
                 {nameof(max), max?.ToString()},
                 {nameof(coins), coins?.ToJoinedList()}
-
             });
             return MakeRequest<IEnumerable<Event>>(builderUri);
         }
 
-        protected async Task<T> MakeRequest<T>(string url)
+        protected async Task<T> MakeRequest<T>(string url, bool isAuthorize = false)
         {
+            if (!isAuthorize)
+            {
+                while (_isAuthorizeInProcess)
+                {
+                    await Task.Delay(100);
+                }
+
+                url = url.ApplyParameters(new Dictionary<string, string>() {{"access_token", AccessToken}});
+            }
             var response = await _client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -143,15 +166,34 @@ namespace CoinMarketCalApi
             return obj;
         }
 
+
+        protected bool CheckAuthorization()
+        {
+            return !string.IsNullOrEmpty(AccessToken);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         protected async Task HandleAuthorization()
         {
-            AuthorizationToken =
-                await MakeRequest<Auth>(
-                    $"/oauth/v2/token?grant_type={GrantType}&client_id={ClientId}&client_secret={ClientSecret}");
+            try
+            {
+                _isAuthorizeInProcess = true;
+                AuthorizationToken =
+                    await MakeRequest<Auth>(
+                        $"/oauth/v2/token?grant_type={GrantType}&client_id={ClientId}&client_secret={ClientSecret}",
+                        true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                _isAuthorizeInProcess = false;
+            }
         }
 
         /// <summary>
