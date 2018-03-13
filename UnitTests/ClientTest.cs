@@ -11,12 +11,15 @@ namespace UnitTests
     [TestFixture]
     public class ClientTest
     {
-        // Update when tests need to be run. Should be permanent in next release
-        private const string AccessToken = "ZjM3ZWU2YTA2Y2IyNmRiYWQ0NzAwYTBmZjVmYmY5ZDU4MTYxMWU5ZmIxMmIzODYyYmY4OTc1NmUzOTllZGZjZQ";
+        
+       
 
         public ClientTest()
         {
-            CoinMarketCalClient.AccessToken = AccessToken;
+            // Update when tests need to be run. Should be permanent in next release.
+            CoinMarketCalClient.AccessToken = "your access token";
+            CoinMarketCalClient.ClientId = "your client id";
+            CoinMarketCalClient.ClientSecret = "your client secret";
         }
 
         [Test]
@@ -107,10 +110,6 @@ namespace UnitTests
         [Test]
         public async Task AuthorizeTest()
         {
-
-            CoinMarketCalClient.ClientId = "your client id";
-            CoinMarketCalClient.ClientSecret = "your client secret";
-
             var client = new CoinMarketCalClient();
             var result = await client.Coins();
             Assert.NotNull(result);
