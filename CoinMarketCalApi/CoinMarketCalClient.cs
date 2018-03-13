@@ -186,10 +186,6 @@ namespace CoinMarketCalApi
                         $"/oauth/v2/token?grant_type={GrantType}&client_id={ClientId}&client_secret={ClientSecret}",
                         true);
             }
-            catch (Exception ex)
-            {
-
-            }
             finally
             {
                 _isAuthorizeInProcess = false;
