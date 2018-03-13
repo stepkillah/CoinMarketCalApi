@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.2</Version>
+    <Version>0.3.3</Version>
     <Authors>Anton Yaroshenko</Authors>
     <Company />
     <Product>CoinMarketCal API</Product>
@@ -16,7 +16,7 @@ https://coinmarketcal.com</Description>
     <PackageProjectUrl>https://github.com/stepkillah/CoinMarketCalApi</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://github.com/stepkillah/CoinMarketCalApi/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>- authorization callback added</PackageReleaseNotes>
+    <PackageReleaseNotes>- code fix</PackageReleaseNotes>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
