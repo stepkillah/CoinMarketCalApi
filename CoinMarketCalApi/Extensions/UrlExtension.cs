@@ -126,7 +126,7 @@ namespace CoinMarketCalApi.Extensions
             var query = string.Join(
                 "&",
                 p.Where(param => !string.IsNullOrWhiteSpace(param.Value))
-                    .Select(kvp => FirstCharacterToLower(kvp.Key) + "=" + Uri.EscapeDataString(kvp.Value)));
+                    .Select(kvp => FirstCharacterToLower(kvp.Key) + "=" + Uri.EscapeDataString(Uri.UnescapeDataString(kvp.Value))));
             return $"{uriWithoutQuery}?{query}";
         }
     }
