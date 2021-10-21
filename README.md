@@ -7,8 +7,8 @@ C# Wrapper for CoinMarketCal API (https://coinmarketcal.com/)
 
 ## Available for:
 - .NET Standard 2.0
-- .NET5
 - .NET Standard 2.1
+- .NET5
 
 ## Example:
 ```csharp
