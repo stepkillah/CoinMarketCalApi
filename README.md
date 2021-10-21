@@ -7,20 +7,13 @@ C# Wrapper for CoinMarketCal API (https://coinmarketcal.com/)
 
 ## Available for:
 - .NET Standard 2.0
-- .NET 4.5
+- .NET5
+- .NET Standard 2.1
 
 ## Example:
 ```csharp
-//there are two ways to handle authorization right now, in future AccessToken will be permanent
-//1. Set ClientId and ClientSecret - it will try to obtain token automatically and will authorize again when token expires
-//2. Set existing access token - it will not update automatically, if ClientId and ClientSecret not set
-CoinMarketCalClient.ClientId = "your client Id";
-CoinMarketCalClient.ClientSecret = "your client Id";
-//OR
-CoinMarketCalClient.AccessToken = "obtained access token"
-
 // Get the instane
-var client = new CoinMarketCalClient(); // or using ICoinMarketCalClient
+var client = new CoinMarketCalClient("API Key"); // or using ICoinMarketCalClient
 // Get coins list
 var coins = await client.Coins();
 // Get categories list
