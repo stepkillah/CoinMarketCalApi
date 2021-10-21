@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CoinMarketCalApi.Entities
 {
@@ -21,7 +20,7 @@ namespace CoinMarketCalApi.Entities
         /// <summary>
         /// Categories Ids
         /// </summary>
-        public IEnumerable<string> Categories { get; set; }
+        public IEnumerable<long> Categories { get; set; }
         /// <summary>
         /// Sorting parameter
         /// </summary>
@@ -38,5 +37,13 @@ namespace CoinMarketCalApi.Entities
         /// Events to that date
         /// </summary>
         public DateTime? DateRangeEnd { get; set; }
+
+        public bool? ShowViews { get; set; }
+        public bool? ShowVotes { get; set; }
+
+        /// <summary>
+        /// "en" "ko" "ru" "tr" "ja" "es" "pl" "pt" "id"
+        /// </summary>
+        public string Translations { get; set; }
     }
 }

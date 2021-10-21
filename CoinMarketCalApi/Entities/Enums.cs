@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CoinMarketCalApi
+﻿namespace CoinMarketCalApi.Entities
 {
     public enum Sorting
     {
         CreatedDesc,
-        HotEvents
+        HotEvents,
+        TrendingEvents,
+        SignificantEvents
     }
 
     public enum ShowOnly
     {
-        HotEvents
+        HotEvents,
+        TrendingEvents,
+        SignificantEvents
     }
 }

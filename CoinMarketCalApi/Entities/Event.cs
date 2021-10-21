@@ -1,44 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CoinMarketCalApi.Entities
 {
     public class Event
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-        [JsonProperty("title")]
-        public string Title { get; set; }
-        [JsonProperty("coins")]
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
+        [JsonPropertyName("title")]
+        public EventTitle Title { get; set; }
+        [JsonPropertyName("coins")]
         public IEnumerable<Coin> Coins { get; set; }
-        [JsonProperty("date_event")]
+        [JsonPropertyName("date_event")]
         public DateTime Date { get; set; }
-        [JsonProperty("created_date")]
+        [JsonPropertyName("created_date")]
         public DateTime CreatedDate { get; set; }
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
-        [JsonProperty("proof")]
+        [JsonPropertyName("proof")]
         public string Proof { get; set; }
-        [JsonProperty("source")]
+        [JsonPropertyName("source")]
         public string Source { get; set; }
-        [JsonProperty("is_hot")]
+        [JsonPropertyName("is_hot")]
         public bool Hot { get; set; }
-        [JsonProperty("vote_count")]
+        [JsonPropertyName("vote_count")]
         public long? VoteCount { get; set; }
-        [JsonProperty("positive_vote_count")]
+        [JsonPropertyName("positive_vote_count")]
         public long? PositiveVoteCount { get; set; }
-        [JsonProperty("percentage")]
+        [JsonPropertyName("percentage")]
         public decimal Percentage { get; set; }
-        [JsonProperty("categories")]
+        [JsonPropertyName("categories")]
         public IEnumerable<Category> Categories { get; set; }
-        [JsonProperty("tip_symbol")]
+        [JsonPropertyName("tip_symbol")]
         public string TipSymbol { get; set; }
-        [JsonProperty("tip_adress")]
+        [JsonPropertyName("tip_adress")]
         public string TipAddress { get; set; }
-        [JsonProperty("twitter_account")]
+        [JsonPropertyName("twitter_account")]
         public string TwitterAccount { get; set; }
-        [JsonProperty("can_occur_before")]
+        [JsonPropertyName("can_occur_before")]
         public bool CanOccurBefore { get; set; }
 
     }

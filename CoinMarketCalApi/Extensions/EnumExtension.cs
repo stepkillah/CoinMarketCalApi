@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CoinMarketCalApi.Entities;
 
 namespace CoinMarketCalApi.Extensions
 {
     internal static class EnumExtension
     {
         private const string HotEvents = "hot_events";
+
+        private const string TrendingEvents = "trending_events";
+
+        private const string SignificantEvents = "significant_events";
 
         public static string GetFriendlyName(this Sorting sort)
         {
@@ -16,6 +18,10 @@ namespace CoinMarketCalApi.Extensions
                     return "created_desc";
                 case Sorting.HotEvents:
                     return HotEvents;
+                case Sorting.TrendingEvents:
+                    return TrendingEvents;
+                case Sorting.SignificantEvents:
+                    return SignificantEvents;
                 default:
                     return null;
             }
@@ -27,6 +33,10 @@ namespace CoinMarketCalApi.Extensions
             {
                 case ShowOnly.HotEvents:
                     return HotEvents;
+                case ShowOnly.TrendingEvents:
+                    return TrendingEvents;
+                case ShowOnly.SignificantEvents:
+                    return SignificantEvents;
                 default:
                     return null;
             }
